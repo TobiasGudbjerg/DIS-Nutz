@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../styles/global.css" />
+    <title>Store</title>
+  </head>
+  <body>
+    <ul>
+      <li><img src="../img/joeLogo.svg" alt="Logo" /></li>
+      <li><a href="/">Home</a></li>
+      <li><a href="/chat">Juice Chat</a></li>
+      <li><a href="/store" class="active">Store</a></li>
+      <li style="float: right">
+        <a href="https://www.joejuice.com/stores?storeType=true&market=dk"
+          >Locations</a
+        >
+      </li>
+      <li style="float: right">
+        <a href="https://www.joejuice.com/culture">Culture</a>
+      </li>
+      <li style="float: right">
+        <a
+          href="https://www.joejuice.com/store/5f871bf1-b0d1-4e2a-ac84-31047281cde9"
+          >Menu</a
+        >
+      </li>
+    </ul>
+    <div class="store-container">
+      <div class="items">
+        <p id="store-header">Buy delicious drinks</p>
+        <p id="loading" style="display: none">Loading...</p>
+        <a href="/chat">Need help? Go to juice chat</a>
+
+        <ul class="store" id="store">
+          <li>
+            <img src="../img/sports_juice.jpeg" alt="Logo" />Sports juice<button>
+              Add to Bag
+            </button>
+          </li>
+          <li>
+            <img src="../img/green_tonic.jpeg" alt="Logo" />Green tonic<button>
+              Add to Bag
+            </button>
+          </li>
+          <li>
+            <img src="../img/ginger_shot.jpeg" alt="Logo" />Ginger shot<button>
+              Add to Bag
+            </button>
+          </li>
+          <li>
+            <img src="../img/energizer.jpeg" alt="Logo" />Energizer<button>
+              Add to Bag
+            </button>
+          </li>
+        </ul>
+      </div>
+
+      <div class="items">
+        <p>Your Bag</p>
+        <ul class="store" id="bag"></ul>
+
+        <button
+          onclick="checkout()"
+          style="margin-top: 25px; margin-bottom: 25px"
+        >
+          Go to checkout!
+        </button>
+      </div>
+    </div>
+  </body>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  <script src="../scripts/store.js"></script>
+  <script src="../scripts/location.js"></script>
+</html>
