@@ -36,6 +36,18 @@ function checkout() {
   .catch(function (error) {});
 }
 
+document.getElementById("logoutButton").addEventListener("click", function() {
+  axios.get("http://localhost:3000/logout")
+    .then(function(response) {
+      // Redirect to home or login page after logout
+      window.location.href = "/";
+    })
+    .catch(function(error) {
+      console.error("Logout failed:", error);
+    });
+});
+
+
 // Extra ting (behøves ikke):
 
 // // Populate bag from cookie on page load

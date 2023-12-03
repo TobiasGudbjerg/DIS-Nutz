@@ -8,11 +8,12 @@ function login() {
   };
 
   axios
-    .post("http://localhost:3000/customer/login", user)
+    .post("http://localhost:3000/home", user)
     .then(function (response) {
-      location.href = "/chat";
+      location.href = "/store";  // Redirect to the store page upon successful login
     })
     .catch(function (error) {
       console.log(error);
     });
 }
+

@@ -1,8 +1,13 @@
 const express = require("express");
 const storeRoutes = express.Router();
+const path = require("path");
 
 const cookieParser = require("cookie-parser");
 storeRoutes.use(cookieParser());
+
+storeRoutes.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "../../client/pages/store.html"));
+});
 
 storeRoutes.post("/checkout", (req, res) => {
   

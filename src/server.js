@@ -1,80 +1,40 @@
+// server.js
+
 const express = require("express");
-const BodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 const cors = require("cors");
 const path = require("path");
-const { response } = require("express")
-const axios = require("axios")
+const session = require("express-session");
+const authRoutes = require("./routes/authRoutes"); // Assuming you've got this file in the routes directory
+const storeRoutes = require("./routes/store"); // And this one too
 
 const app = express();
 
-const customerRoute = require("./routes/customer");
-const storeRoutes = require("./routes/store");
+app.use(session({
+  secret: 'your-secret-key',
+  resave: false,
+  saveUninitialized: false,
+  cookie: { secure: false, maxAge: 3600000 }
+}));
 
-const http = require("http").Server(app);
-const io = require("socket.io")(http);
-
-const chatLog = require("./db/chat.js");
-
-// Middlewares
 
 app.use(cors());
 app.use(express.json());
-app.use(BodyParser.json())
-app.use(BodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+
+// Serve static files from the `client` directory
 app.use(express.static(path.join(__dirname, "../client")));
 
-// Send client files from server
+// Use the authentication routes
+app.use(authRoutes);
 
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/pages/home.html"));
+// Use store-related routes
+app.use("/store",storeRoutes);
+
+// Start the server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
-
-app.get("/global.css", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/styles/global.css"));
-});
-
-app.get("/chat", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/pages/chat.html"));
-});
-
-app.get("/store", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/pages/store.html"));
-});
-
-app.get("/home.js", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/scripts/home.js"));
-});
-
-// app.get("/chatlog", (req, res) => {
-//   res.send(chatLog);
-// });
-
-// API
-
-app.use("/customer", customerRoute);
-app.use("/store", storeRoutes);
-
-// Start server
-
-app.listen(3000, () => {
-  console.log("Server open on port 3000");
-});
-
-// Socket IO
-
-/*
-io.on("connection", (socket) => {
-  socket.on("chat message", (msg) => {
-    io.emit("chat message", msg);
-    chatLog.push(msg);
-  });
-  socket.on("user joined", (username) => {
-    console.log(username + " joined the chat");
-    io.emit("chat message", username + " joined the chat");
-  });
-});
-
-http.listen(3000, "localhost", () => {
-  console.log(`Socket.IO server running at http://localhost:3000/`);
-});
-*/
