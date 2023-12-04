@@ -2,29 +2,31 @@ const express = require("express");
 const storeRoutes = express.Router();
 const path = require("path");
 
-const cookieParser = require("cookie-parser");
-storeRoutes.use(cookieParser());
+// const cookieParser = require("cookie-parser");
+// storeRoutes.use(cookieParser());
 
 storeRoutes.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../../client/pages/store.html"));
 });
 
+
 storeRoutes.post("/checkout", (req, res) => {
-  const username = req.cookies.user; // Access the username from the cookie
-
-  console.log('User:', username);
+  const bagItems = req.session.bagItems || [];
   
-  console.log(req.cookies);
-  const bag = req.cookies.bagItems;
-  const bagSplit = bag.split(",");
+  if (bagItems.length === 0) {
+    return res.status(400).send("No bag items to checkout.");
+  }
 
-  bagSplit.forEach((item) => {
-    console.log(item);
-  });
+  // Process checkout with bagItems
+  console.log("Checkout items:", bagItems);
 
-  console.log(bagSplit);
+  // Implement your checkout logic here
+  // ...
 
-  res.status(201).json({});
+  res.status(201).json({ message: "Checkout successful" });
 });
+
+
+
 
 module.exports = storeRoutes;

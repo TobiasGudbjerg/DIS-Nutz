@@ -6,40 +6,51 @@ store.addEventListener("click", function (e) {
     const item = e.target.parentElement;
     const itemName = item.textContent.trim();
 
-    addToCookie(itemName);
-
-    e.target.remove(); // Fjern knap
-
-    store.removeChild(item);
-    bag.appendChild(item);
+    // Send a request to add the item to the user's bagItems
+    axios.post('/addItemToBag', { item: itemName })
+      .then(function (response) {
+        console.log("Item added to bag");
+        moveItemToBagUI(itemName);
+      })
+      .catch(function (error) {
+        console.error("Error adding item to bag:", error);
+      });
   }
 });
 
-function addToCookie(itemName) {
-  const existingItems = getCookie("bagItems") || "";
-  if (!existingItems.split(",").includes(itemName)) {
-    document.cookie =
-      "bagItems=" + existingItems + (existingItems ? "," : "") + itemName;
+function moveItemToBagUI(itemName) {
+  const storeItems = Array.from(store.children);
+  const itemToMove = storeItems.find(li => li.textContent.trim() === itemName);
+  
+  if (itemToMove) {
+    const button = itemToMove.querySelector("button");
+    if (button) button.remove();
+    store.removeChild(itemToMove);
+    bag.appendChild(itemToMove);
   }
 }
 
-function getCookie(name) {
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) return parts.pop().split(";").shift();
+function checkout() {
+  axios.post("/store/checkout")
+    .then(function (response) {
+      console.log("Checkout successful");
+      alert("Checkout successful!");
+      clearBagUI();
+    })
+    .catch(function (error) {
+      console.error("Checkout error:", error);
+    });
 }
 
-function checkout() {
-  axios
-  .post("http://188.166.87.221/store/checkout", {bag: document.cookie})
-  .then(function (response) {})
-  .catch(function (error) {});
+function clearBagUI() {
+  while (bag.firstChild) {
+    bag.removeChild(bag.firstChild);
+  }
 }
 
 document.getElementById("logoutButton").addEventListener("click", function() {
-  axios.get("http://188.166.87.221/logout")
+  axios.get("/logout")
     .then(function(response) {
-      // Redirect to home or login page after logout
       window.location.href = "/";
     })
     .catch(function(error) {
@@ -47,26 +58,16 @@ document.getElementById("logoutButton").addEventListener("click", function() {
     });
 });
 
-// Populate bag from cookie on page load
-const savedItems = getCookie("bagItems");
-if (savedItems) {
-  savedItems.split(",").forEach((itemName) => {
-    if (itemName) {
-      moveItemToBag(itemName);
-    }
-  });
+function loadBagItemsFromServer() {
+  axios.get('/getBagItems')
+    .then(function (response) {
+      response.data.forEach(itemName => {
+        moveItemToBagUI(itemName);
+      });
+    })
+    .catch(function (error) {
+      console.error("Error loading bag items:", error);
+    });
 }
 
-function moveItemToBag(itemName) {
-  const storeItems = Array.from(store.children);
-  const itemToMove = storeItems.find(li => li.textContent.trim() === itemName);
-  
-  if (itemToMove) {
-    const button = itemToMove.querySelector("button");
-    if (button) button.remove(); // Remove the button
-
-    store.removeChild(itemToMove);
-    bag.appendChild(itemToMove);
-  }
-}
-
+loadBagItemsFromServer();
