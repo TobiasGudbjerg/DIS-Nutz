@@ -73,24 +73,26 @@ router.get("/", (req, res) => {
 });
 
 router.post("/home", async (req, res) => {
-  try {
-    const { username, password } = req.body;
-    const user = await getUserByUsername(username);
-    if (!user || user.password !== hashPassword(password)) {
-      return res.status(401).send("Invalid credentials.");
+    try {
+      const { username, password } = req.body;
+      const user = await getUserByUsername(username);
+      if (!user || user.password !== hashPassword(password)) {
+        return res.status(401).send("Invalid credentials.");
+      }
+  
+      req.session.loggedIn = true;
+      req.session.username = user.username;
+      
+      const userBagItems = await getUserBagItems(user.username);
+      req.session.bagItems = userBagItems;
+  
+      res.cookie('user', user.username, { httpOnly: true, maxAge: 3600000 });
+      res.redirect("/store");
+    } catch (err) {
+      res.status(500).send("Server error.");
     }
-
-    req.session.loggedIn = true;
-    req.session.username = user.username;
-    const userBagItems = await getUserBagItems(user.username);
-    req.session.bagItems = userBagItems;
-
-    res.cookie('user', user.username, { httpOnly: true, maxAge: 3600000 });
-    res.redirect("/store");
-  } catch (err) {
-    res.status(500).send("Server error.");
-  }
-});
+  });
+  
 
 router.get("/logout", (req, res) => {
   req.session.destroy(() => {
@@ -127,15 +129,16 @@ const saveUserBagItems = (username, bagItems) => {
 };
 
 const getUserBagItems = (username) => {
-  return new Promise((resolve, reject) => {
-    db.get("SELECT bagItems FROM users WHERE username = ?", [username], (err, row) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(row ? row.bagItems.split(',') : []);
-      }
+    return new Promise((resolve, reject) => {
+      db.get("SELECT bagItems FROM users WHERE username = ?", [username], (err, row) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(row && row.bagItems ? row.bagItems.split(',') : []);
+        }
+      });
     });
-  });
-};
+  };
+  
 
 module.exports = router;
