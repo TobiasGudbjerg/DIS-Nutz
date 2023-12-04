@@ -10,9 +10,11 @@ storeRoutes.get("/", (req, res) => {
 });
 
 storeRoutes.post("/checkout", (req, res) => {
+  const username = req.cookies.user; // Access the username from the cookie
+
+  console.log('User:', username);
   
   console.log(req.cookies);
-
   const bag = req.cookies.bagItems;
   const bagSplit = bag.split(",");
 

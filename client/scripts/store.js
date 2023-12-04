@@ -47,30 +47,26 @@ document.getElementById("logoutButton").addEventListener("click", function() {
     });
 });
 
+// Populate bag from cookie on page load
+const savedItems = getCookie("bagItems");
+if (savedItems) {
+  savedItems.split(",").forEach((itemName) => {
+    if (itemName) {
+      moveItemToBag(itemName);
+    }
+  });
+}
 
-// Extra ting (behøves ikke):
+function moveItemToBag(itemName) {
+  const storeItems = Array.from(store.children);
+  const itemToMove = storeItems.find(li => li.textContent.trim() === itemName);
+  
+  if (itemToMove) {
+    const button = itemToMove.querySelector("button");
+    if (button) button.remove(); // Remove the button
 
-// // Populate bag from cookie on page load
-// const savedItems = getCookie("bagItems");
-// if (savedItems) {
-//   savedItems.split(",").forEach((itemName) => {
-//     if (itemName) {
-//       moveItemToBag(itemName);
-//     }
-//   });
-// }
+    store.removeChild(itemToMove);
+    bag.appendChild(itemToMove);
+  }
+}
 
-// function moveItemToBag(itemName) {
-//   const store = document.getElementById("store");
-//   const bag = document.getElementById("bag");
-
-//   Array.from(store.children).forEach((li) => {
-//     if (li.textContent.includes(itemName)) {
-//       const button = li.querySelector("button");
-//       if (button) button.remove(); // Remove the button
-
-//       store.removeChild(li);
-//       bag.appendChild(li);
-//     }
-//   });
-// }

@@ -73,20 +73,25 @@ router.get("/", (req, res) => {
   });
 
 
-router.post("/home", async (req, res) => {
-  try {
-    const { username, password } = req.body;
-    const user = await getUserByUsername(username);
-    if (!user || user.password !== hashPassword(password)) {
-      return res.status(401).send("Invalid credentials.");
+  router.post("/home", async (req, res) => {
+    try {
+      const { username, password } = req.body;
+      const user = await getUserByUsername(username);
+      if (!user || user.password !== hashPassword(password)) {
+        return res.status(401).send("Invalid credentials.");
+      }
+  
+      req.session.loggedIn = true;
+      req.session.username = user.username;
+  
+      // Set a cookie for the logged-in user
+      res.cookie('user', user.username, { httpOnly: true, maxAge: 3600000 }); // Customize as needed
+  
+      res.redirect("/store");
+    } catch (err) {
+      res.status(500).send("Server error.");
     }
-    req.session.loggedIn = true;
-    req.session.username = user.username;
-    res.redirect("/store");
-  } catch (err) {
-    res.status(500).send("Server error.");
-  }
-});
+  });
 
 router.get("/logout", (req, res) => {
   req.session.destroy(() => {
