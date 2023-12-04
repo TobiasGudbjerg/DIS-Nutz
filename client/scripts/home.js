@@ -8,7 +8,7 @@ function login() {
   };
 
   axios
-    .post("http://localhost:3000/home", user)
+    .post("http://188.166.87.221/home", user)
     .then(function (response) {
       location.href = "/store";  // Redirect to the store page upon successful login
     })
