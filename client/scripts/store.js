@@ -31,13 +31,13 @@ function getCookie(name) {
 
 function checkout() {
   axios
-  .post("http://localhost:3000/store/checkout", {bag: document.cookie})
+  .post("http://188.166.87.221/store/checkout", {bag: document.cookie})
   .then(function (response) {})
   .catch(function (error) {});
 }
 
 document.getElementById("logoutButton").addEventListener("click", function() {
-  axios.get("http://localhost:3000/logout")
+  axios.get("http://188.166.87.221/logout")
     .then(function(response) {
       // Redirect to home or login page after logout
       window.location.href = "/";
