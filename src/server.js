@@ -31,7 +31,7 @@ app.use(express.static(path.join(__dirname, "../client")));
 // Use the authentication routes
 app.use(authRoutes);
 
-// Use the authentication routes
+// Use the chat routes
 app.use(chatRoutes);
 
 // Use store-related routes

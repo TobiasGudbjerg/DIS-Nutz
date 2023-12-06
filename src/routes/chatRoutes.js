@@ -10,3 +10,5 @@ router.get("/chat", (req, res) => {
     res.sendFile(path.join(__dirname, "../../client/pages/chat.html"));
   });
   
+
+  module.exports = router;
