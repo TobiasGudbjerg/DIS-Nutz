@@ -48,16 +48,6 @@ function clearBagUI() {
   }
 }
 
-document.getElementById("logoutButton").addEventListener("click", function() {
-  axios.get("/logout")
-    .then(function(response) {
-      window.location.href = "/";
-    })
-    .catch(function(error) {
-      console.error("Logout failed:", error);
-    });
-});
-
 function loadBagItemsFromServer() {
   axios.get('/getBagItems')
     .then(function (response) {
@@ -71,3 +61,13 @@ function loadBagItemsFromServer() {
 }
 
 loadBagItemsFromServer();
+
+document.getElementById("logoutButton").addEventListener("click", function() {
+  axios.get("/logout")
+    .then(function(response) {
+      window.location.href = "/";
+    })
+    .catch(function(error) {
+      console.error("Logout failed:", error);
+    });
+});

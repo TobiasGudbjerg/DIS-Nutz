@@ -20,8 +20,7 @@ storeRoutes.post("/checkout", (req, res) => {
   // Process checkout with bagItems
   console.log("Checkout items:", bagItems);
 
-  // Implement your checkout logic here
-  // ...
+  // Når vi finner ut av det
 
   res.status(201).json({ message: "Checkout successful" });
 });
