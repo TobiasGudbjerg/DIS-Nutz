@@ -7,7 +7,7 @@ const path = require("path");
 const session = require("express-session");
 const authRoutes = require("./routes/authRoutes"); // Assuming you've got this file in the routes directory
 const storeRoutes = require("./routes/store"); // And this one too
-const storeRoutes = require("./routes/chatRoutes"); // And this one too
+const chatRoutes = require("./routes/chatRoutes"); // And this one too
 
 const app = express();
 
