@@ -29,7 +29,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "../client")));
 
 // Use the authentication routes
-app.use(authRoutes);
+app.use(authRoutes); 
 
 // Use the chat routes
 app.use(chatRoutes);
