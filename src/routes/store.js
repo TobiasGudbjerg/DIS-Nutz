@@ -27,14 +27,6 @@ storeRoutes.post("/checkout", (req, res) => {
   // Process checkout with bagItems
   console.log("Checkout items:", bagItems);
   
-  client.messages
-    .create({
-        body: 'hei',
-        messagingServiceSid: 'MGc7c78d76b29a769c368622d0c696c50c',
-        to: '+4792227563'
-    })
-    .then(message => console.log(message.sid))
-    .done();
 
   // Når vi finner ut av det
 
