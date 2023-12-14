@@ -2,6 +2,10 @@ const express = require("express");
 const storeRoutes = express.Router();
 const path = require("path");
 
+const accountSid = 'AC6ad8c21167afce2ed9caa64fdc3317b1';
+const auth = '758687400ba02d7f42fea4ea443903b';
+const authToken = auth + '0'
+const client = require('twilio')(accountSid, authToken);
 
 
 // const cookieParser = require("cookie-parser");
@@ -23,6 +27,14 @@ storeRoutes.post("/checkout", (req, res) => {
   // Process checkout with bagItems
   console.log("Checkout items:", bagItems);
   
+  client.messages
+    .create({
+        body: 'hei du har bestilt!',
+        messagingServiceSid: 'MGc7c78d76b29a769c368622d0c696c50c',
+        to: '+4792227563'
+    })
+    .then(message => console.log(message.sid))
+    .done();
 
   // Når vi finner ut av det
 
