@@ -81,7 +81,7 @@ router.post("/home", async (req, res) => {
         return res.status(401).send("Invalid credentials.");
       }
 
-      const phone = telephone
+      
       req.session.loggedIn = true;
       req.session.username = user.username;
       req.session.telephone = user.phone;
