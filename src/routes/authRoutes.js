@@ -74,19 +74,23 @@ router.get("/", (req, res) => {
 
 router.post("/home", async (req, res) => {
     try {
+      
       const { username, password, telephone } = req.body;
       const user = await getUserByUsername(username);
       if (!user || user.password !== hashPassword(password)) {
         return res.status(401).send("Invalid credentials.");
       }
-  
+
+      const phone = telephone
       req.session.loggedIn = true;
       req.session.username = user.username;
+      req.session.telephone = user.phone;
       
       const userBagItems = await getUserBagItems(user.username);
       req.session.bagItems = userBagItems;
   
       res.cookie('user', user.username, { httpOnly: true, maxAge: 3600000 });
+      res.cookie('telephone',user.telephone, {httpOnly: true, maxAge: 3600000})
       res.redirect("/store");
     } catch (err) {
       res.status(500).send("Server error.");

@@ -26,12 +26,14 @@ storeRoutes.post("/checkout", (req, res) => {
 
   // Process checkout with bagItems
   console.log("Checkout items:", bagItems);
+
+  let phonenumber = req.session.user
   
   client.messages
     .create({
-        body: 'hei du har bestilt!',
+        body: 'jeg bor i veggene dine.',
         messagingServiceSid: 'MGc7c78d76b29a769c368622d0c696c50c',
-        to: '+4792227563'
+        to: phonenumber
     })
     .then(message => console.log(message.sid))
     .done();
