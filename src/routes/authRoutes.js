@@ -74,7 +74,7 @@ router.get("/", (req, res) => {
 
 router.post("/home", async (req, res) => {
     try {
-      const { username, password } = req.body;
+      const { username, password, telephone } = req.body;
       const user = await getUserByUsername(username);
       if (!user || user.password !== hashPassword(password)) {
         return res.status(401).send("Invalid credentials.");
