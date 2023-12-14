@@ -30,6 +30,12 @@ function moveItemToBagUI(itemName) {
   }
 }
 
+function clearBagUI() {
+  while (bag.firstChild) {
+    bag.removeChild(bag.firstChild);
+  }
+}
+
 function checkout() {
   axios.post("/store/checkout")
     .then(function (response) {
@@ -42,11 +48,7 @@ function checkout() {
     });
 }
 
-function clearBagUI() {
-  while (bag.firstChild) {
-    bag.removeChild(bag.firstChild);
-  }
-}
+
 
 function loadBagItemsFromServer() {
   axios.get('/getBagItems')
