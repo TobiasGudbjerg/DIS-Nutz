@@ -1,10 +1,6 @@
 const express = require("express");
 const storeRoutes = express.Router();
 const path = require("path");
-const accountSid = 'AC6ad8c21167afce2ed9caa64fdc3317b1';
-const authToke = '758687400ba02d7f42fea4ea443903b';
-const authToken = authToke + "0"
-const client = require('twilio')(accountSid, authToken);
 
 
 
