@@ -36,6 +36,7 @@ function clearBagUI() {
   }
 }
 
+
 function checkout() {
   axios.post("/store/checkout")
     .then(function (response) {

@@ -39,13 +39,13 @@ router.get("/signup", (req, res) => {
 
 router.post("/signup", async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { username, password,telephone } = req.body;
     const user = await getUserByUsername(username);
     if (user) {
       return res.status(409).send("Username already exists.");
     }
     const hashedPassword = hashPassword(password);
-    db.run("INSERT INTO users (username, password) VALUES (?, ?)", [username, hashedPassword], function(err) {
+    db.run("INSERT INTO users (username, password,telephone) VALUES (?, ?, ?)", [username, hashedPassword,telephone], function(err) {
       if (err) {
         return res.status(500).send("Error registering new user.");
       }
