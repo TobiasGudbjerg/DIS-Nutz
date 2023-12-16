@@ -27,7 +27,8 @@ storeRoutes.post("/checkout", (req, res) => {
   // Process checkout with bagItems
   console.log("Checkout items:", bagItems);
 
-  let phonenumber = req.session.telephone  
+  let phonenumber = req.session.telephone 
+  console.log(phonenumber)
   let order = req.session.bagItems
   
   let message = `Your order has been received! Your order will be ready in 10 minutes.\nOrder Details:\n${order}`;
