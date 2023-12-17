@@ -36,6 +36,9 @@ const getUserByUsername = (username) => {
 router.get("/signup", (req, res) => {
   res.sendFile(path.join(__dirname, "../../client/pages/signup.html"));
 });
+router.get("/order", (req, res) => {
+  res.sendFile(path.join(__dirname, "../../client/pages/order.html"));
+});
 
 router.post("/signup", async (req, res) => {
   try {
