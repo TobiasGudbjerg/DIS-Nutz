@@ -8,6 +8,7 @@ const session = require("express-session");
 const authRoutes = require("./routes/authRoutes"); // Assuming you've got this file in the routes directory
 const storeRoutes = require("./routes/store"); // And this one too
 const chatRoutes = require("./routes/chatRoutes"); // And this one too
+const order = require("./routes/order");
 
 const app = express();
 
@@ -34,9 +35,11 @@ app.use(authRoutes);
 // Use the chat routes
 app.use(chatRoutes);
 
-// Use store-related routes
+// Use allergies-related routes
 app.use("/store",storeRoutes);
 
+// Use order-related routes
+app.use("/order",order);
 
 const PORT = 3000;
 app.listen(PORT, () => {

@@ -14,6 +14,9 @@ const client = require('twilio')(accountSid, authToken);
 storeRoutes.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../../client/pages/store.html"));
 });
+storeRoutes.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "../../client/pages/order.html"));
+});
 
 
 storeRoutes.post("/checkout", (req, res) => {
