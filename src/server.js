@@ -28,20 +28,14 @@ app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-
-// Serve static files from the `client` directory
 app.use(express.static(path.join(__dirname, "../client")));
 
-// Use the authentication routes
 app.use(authRoutes); 
 
-// Use the chat routes
 app.use(chatRoutes);
 
-// Use allergies-related routes
 app.use("/store",storeRoutes);
 
-// Socket.IO setup
 io.on("connection", (socket) => {
   console.log("A user connected");
   socket.on("chat message", (data) => {

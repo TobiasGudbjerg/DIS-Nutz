@@ -9,8 +9,7 @@ const auth = '758687400ba02d7f42fea4ea443903b';
 const authToken = auth + '0'
 const client = require('twilio')(accountSid, authToken);
 
- storeRoutes.use(cookieParser());
-
+storeRoutes.use(cookieParser());
 
 storeRoutes.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../../client/pages/store.html"));
@@ -18,7 +17,6 @@ storeRoutes.get("/", (req, res) => {
 storeRoutes.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../../client/pages/order.html"));
 });
-
 
 storeRoutes.post("/checkout", (req, res) => {
   

@@ -9,7 +9,6 @@ socket.emit("user joined", username);
 function sendChat() {
   const userCookie = getCookie('user');
   if (input.value) {
-    // Include the cookie with the message
     socket.emit("chat message", { message: input.value, user: userCookie });
     input.value = "";
   }

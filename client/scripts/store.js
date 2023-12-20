@@ -6,7 +6,6 @@ store.addEventListener("click", function (e) {
     const item = e.target.parentElement;
     const itemName = item.textContent.trim();
 
-    // Send a request to add the item to the user's bagItems
     axios.post('/addItemToBag', { item: itemName })
       .then(function (response) {
         console.log("Item added to bag");
@@ -30,7 +29,6 @@ function moveItemToBagUI(itemName) {
   }
 }
 
-
 function checkout() {
   axios.post("/store/checkout")
     .then(function (response) {
@@ -41,8 +39,6 @@ function checkout() {
       console.error("Checkout error:", error);
     });
 }
-
-
 
 function loadBagItemsFromServer() {
   axios.get('/getBagItems')

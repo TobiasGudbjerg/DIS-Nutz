@@ -12,7 +12,7 @@ function login() {
   axios
     .post("http://188.166.87.221/home", user)
     .then(function (response) {
-      location.href = "/store";  // Redirect to the store page upon successful login
+      location.href = "/store";
     })
     .catch(function (error) {
       console.log(error);
