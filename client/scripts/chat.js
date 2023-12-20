@@ -7,15 +7,17 @@ const username = getCookie('user') || 'Anonymous';
 socket.emit("user joined", username);
 
 function sendChat() {
+  const userCookie = getCookie('user');
   if (input.value) {
-    socket.emit("chat message", { message: input.value, user: username }); // Send user with message
+    // Include the cookie with the message
+    socket.emit("chat message", { message: input.value, user: userCookie });
     input.value = "";
   }
 }
 
 socket.on("chat message", (data) => {
   const item = document.createElement("li");
-  item.textContent = data.user + ": " + data.message; // Adjust to display user and message
+  item.textContent = data.user + ": " + data.message;
   messages.appendChild(item);
   window.scrollTo(0, document.body.scrollHeight);
 });
