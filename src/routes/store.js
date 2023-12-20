@@ -32,8 +32,13 @@ storeRoutes.post("/checkout", (req, res) => {
   console.log("Checkout items:", bagItems);
 
   let phonenumber = req.session.telephone;
+  if (!phonenumber) {
+    console.log("Phone number is missing from the session.");
+    return res.status(400).send("Phone number is missing.");
+  }
   let order = req.session.bagItems
-  console.log(phonenumber);
+
+  let phonenumberS = "+47" + phonenumber;
   
   let message = `Your order has been received! Your order will be ready in 10 minutes.\nOrder Details:\n${order}`;
   
@@ -41,7 +46,7 @@ storeRoutes.post("/checkout", (req, res) => {
     .create({
         body: message,
         messagingServiceSid: 'MGc7c78d76b29a769c368622d0c696c50c',
-        to: "+47" + phonenumber
+        to: phonenumberS
     })
     .then(message => console.log(message.sid))
     .catch(error => {
