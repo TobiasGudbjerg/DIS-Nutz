@@ -5,31 +5,28 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../styles/global.css" />
-    <title>Log ind</title>
+    <title>Welcome</title>
   </head>
   <body>
-    <ul>
-      <li><img src="../img/joeLogo.svg" alt="Logo" /></li>
-      <li><a href="/" class="active">Welcome</a></li>
-    </ul>
     <div class="center">
       <p id="message"></p>
-      <div>
-        <p>Brugernavn</p>
+      <div id="ting">
+        <h1>Welcome!</h1>
+        <p>Username</p>
         <input
           id="username"
           class="input"
           type="text"
           placeholder="Type here"
         />
-        <p>Adgangskode</p>
+        <p>Password</p>
         <input
           id="password"
           class="input"
           type="password"
           placeholder="Type here"
         />
-        <p>telefon</p>
+        <p>Telephone</p>
         <input
           id="telephone"
           class="input"
@@ -37,8 +34,8 @@
           placeholder="Type here"
         />
         <div style="margin-top: 20px">
-          <button onclick="login()">Log ind</button>
-          <a href="/signup">Go to Sign Up</a>
+          <button onclick="login()">Log in</button>
+          <button><a href="/signup">Sign up now!</a></button>
         </div>
       </div>
     </div>

@@ -1,5 +1,17 @@
 body {
   font-family: 'Arial', sans-serif;
+  background-image: url('../img/bakgrunn.jpg');
+  background-color: #f0d8e4;
+}
+#ting {
+  background-color: #f7c0d9;
+  border-radius: 10px;
+}
+
+h1 {
+  text-align: center;
+  color: #303030;
+
 }
 
 ul {
@@ -44,10 +56,6 @@ li a:hover {
   font-weight: bolder;
 }
 
-/* .container {
-margin: auto;
-} */
-
 .center {
   padding-top: 50px;
   display: flex;
@@ -68,7 +76,13 @@ margin: auto;
   font-size: 0.8rem;
   background-color: #f7c1d9;
   font-weight: bold;
+  margin-bottom: 10px;
 }
+
+a:link { text-decoration: none; color: black; }
+a:visited { text-decoration: none; color: black; }
+a:hover { text-decoration: none; color: black; }
+a:active { text-decoration: none; color: black; }
 
 .messages {
   display: flex;
@@ -88,6 +102,7 @@ margin: auto;
   background-color: #f7c1d9;
   border-radius: 30px;
   margin-top: 30px;
+  width: auto;
 }
 
 .input,
@@ -112,6 +127,7 @@ input {
   font-family: "Courier New", Courier, monospace;
   font-style: italic;
   font-size: 1.5em;
+  margin-bottom: 0;
 }
 
 .chat-cta {
@@ -120,6 +136,8 @@ input {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 /* Store */
@@ -173,3 +191,15 @@ input {
   min-width: 500px;
 }
 
+#logoutButton {
+  border: 1px solid #f7c1d96a;
+  border-radius: 10px;
+  padding: 14px;
+  font-size: 0.8rem;
+  background-color: #f7c1d9;
+}
+
+#logoutButton:hover {
+  background-color: #f09bc1;
+  font-weight: bolder;
+}
