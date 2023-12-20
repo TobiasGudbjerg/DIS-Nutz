@@ -31,7 +31,8 @@ storeRoutes.post("/checkout", (req, res) => {
   // Process checkout with bagItems
   console.log("Checkout items:", bagItems);
 
-  const phonenumber = req.session.telephone 
+  let phonenumber = req.session.telephone;
+  let phonenumberS = phonenumber.toString();
   let order = req.session.bagItems
   console.log(phonenumber);
   
@@ -39,18 +40,18 @@ storeRoutes.post("/checkout", (req, res) => {
   
   client.messages
     .create({
-        body: message ,
+        body: message,
         messagingServiceSid: 'MGc7c78d76b29a769c368622d0c696c50c',
         to: "+47" + phonenumber
     })
     .then(message => console.log(message.sid))
-    .done();
-
-  // Når vi finner ut av det
+    .catch(error => {
+      console.error("Error sending message:", error);
+      res.status(500).send("Error in sending message.");
+    });
 
   res.status(201).json({ message: "Checkout successful" });
 });
-
 
 
 module.exports = storeRoutes;
