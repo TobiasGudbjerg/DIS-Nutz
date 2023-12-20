@@ -1,6 +1,7 @@
 const express = require("express");
 const storeRoutes = express.Router();
 const path = require("path");
+const session = require('express-session');
 
 const accountSid = 'AC6ad8c21167afce2ed9caa64fdc3317b1';
 const auth = '758687400ba02d7f42fea4ea443903b';
@@ -30,7 +31,7 @@ storeRoutes.post("/checkout", (req, res) => {
   // Process checkout with bagItems
   console.log("Checkout items:", bagItems);
 
-  const phonenumber = req.cookie.telephone 
+  const phonenumber = req.session.telephone 
   let order = req.session.bagItems
   
   let message = `Your order has been received! Your order will be ready in 10 minutes.\nOrder Details:\n${order}`;
