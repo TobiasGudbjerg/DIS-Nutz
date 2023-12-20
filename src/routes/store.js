@@ -30,9 +30,7 @@ storeRoutes.post("/checkout", (req, res) => {
   // Process checkout with bagItems
   console.log("Checkout items:", bagItems);
 
-  let phonenumber = req.session.telephone 
-  let phonenumberS = (phonenumber).toString();
-  console.log(phonenumberS)
+  const phonenumber = req.cookie.telephone 
   let order = req.session.bagItems
   
   let message = `Your order has been received! Your order will be ready in 10 minutes.\nOrder Details:\n${order}`;
@@ -41,7 +39,7 @@ storeRoutes.post("/checkout", (req, res) => {
     .create({
         body: message ,
         messagingServiceSid: 'MGc7c78d76b29a769c368622d0c696c50c',
-        to: "+47" + phonenumberS
+        to: "+47" + phonenumber
     })
     .then(message => console.log(message.sid))
     .done();
