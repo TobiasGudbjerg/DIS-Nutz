@@ -44,11 +44,9 @@ app.use("/store",storeRoutes);
 // Socket.IO setup
 io.on("connection", (socket) => {
   console.log("A user connected");
-  
   socket.on("chat message", (data) => {
     io.emit("chat message", { user: data.user, message: data.message });
   });
-
   socket.on("disconnect", () => {
     console.log("A user disconnected");
   });
