@@ -32,7 +32,6 @@ storeRoutes.post("/checkout", (req, res) => {
   console.log("Checkout items:", bagItems);
 
   let phonenumber = req.session.telephone;
-  let phonenumberS = phonenumber.toString();
   let order = req.session.bagItems
   console.log(phonenumber);
   
