@@ -3,7 +3,6 @@ const storeRoutes = express.Router();
 const path = require("path");
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
-app.use(cookieParser());
 
 const accountSid = 'AC6ad8c21167afce2ed9caa64fdc3317b1';
 const auth = '758687400ba02d7f42fea4ea443903b';
