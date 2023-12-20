@@ -16,21 +16,10 @@ function sendChat() {
   }
 }
 
-function changeUsername() {
-  username = document.getElementById("username").value;
-
-  if (username == "") {
-    alert("Skriv et nyt brugernavn");
-    return;
-  } else document.cookie = `userAuth=${username}`;
-
-  socket.emit("user joined", username);
-  document.getElementById("username").value = "";
-}
 
 // Socket.io
 
-let username = getCookie("userAuth");
+let username = getCookie("user");
 if (!username) location.href = "/";
 
 socket.emit("user joined", username ? username : "Anonymous");
