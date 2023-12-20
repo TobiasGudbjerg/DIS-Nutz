@@ -30,19 +30,12 @@ function moveItemToBagUI(itemName) {
   }
 }
 
-function clearBagUI() {
-  while (bag.firstChild) {
-    bag.removeChild(bag.firstChild);
-  }
-}
-
 
 function checkout() {
   axios.post("/store/checkout")
     .then(function (response) {
       console.log("Checkout successful");
       alert("Checkout successful!");
-      clearBagUI();
     })
     .catch(function (error) {
       console.error("Checkout error:", error);
