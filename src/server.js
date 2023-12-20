@@ -10,7 +10,6 @@ const storeRoutes = require("./routes/store");
 const chatRoutes = require("./routes/chatRoutes"); 
 const http = require("http"); 
 const { Server } = require("socket.io"); 
-const sharedsession = require("express-socket.io-session");
 
 const app = express();
 const httpServer = http.createServer(app);
@@ -19,20 +18,10 @@ const io = new Server(httpServer);
 app.use(session({
   secret: 'your-secret-key',
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
   cookie: { secure: false, maxAge: 3600000 }
 }));
 
-const sessionMiddleware = session({
-  secret: 'your-secret-key',
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: false, maxAge: 3600000 }
-});
-
-io.use(sharedsession(sessionMiddleware, {
-  autoSave: true
-}));
 
 app.use(cors());
 app.use(express.json());
