@@ -14,6 +14,7 @@ function getCookie(name) {
   return null;
 }
 
+console.log(getCookie());
 
 let username = getCookie("user");
 if (!username) username = "Anonymous";
@@ -32,4 +33,14 @@ socket.on("chat message", (msg) => {
   item.textContent = msg;
   messages.appendChild(item);
   window.scrollTo(0, document.body.scrollHeight);
+});
+
+document.getElementById("logoutButton").addEventListener("click", function() {
+  axios.get("/logout")
+    .then(function(response) {
+      window.location.href = "/";
+    })
+    .catch(function(error) {
+      console.error("Logout failed:", error);
+    });
 });
