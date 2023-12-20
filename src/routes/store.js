@@ -2,6 +2,8 @@ const express = require("express");
 const storeRoutes = express.Router();
 const path = require("path");
 const session = require('express-session');
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
 
 const accountSid = 'AC6ad8c21167afce2ed9caa64fdc3317b1';
 const auth = '758687400ba02d7f42fea4ea443903b';
@@ -31,10 +33,10 @@ storeRoutes.post("/checkout", (req, res) => {
   // Process checkout with bagItems
   console.log("Checkout items:", bagItems);
 
-  let phonenumber = req.session.telephone;
+  const phonenumber = req.cookies.telephone;
   if (!phonenumber) {
-    console.log("Phone number is missing from the session.");
-    return res.status(400).send("Phone number is missing.");
+    console.log("Telephone cookie is not set.");
+    return res.status(400).send("Telephone number is missing.");
   }
   let order = req.session.bagItems
 
