@@ -22,15 +22,11 @@ storeRoutes.get("/", (req, res) => {
 
 
 storeRoutes.post("/checkout", (req, res) => {
-  const bagItems = req.session.bagItems || [];
-  console.log(bagItems)
   
+  const bagItems = req.session.bagItems || [];
   if (bagItems.length === 0) {
     return res.status(400).send("No bag items to checkout.");
   }
-
-  // Process checkout with bagItems
-  console.log("Checkout items:", bagItems);
 
   const phonenumber = req.cookies.telephone;
   if (!phonenumber) {
