@@ -32,7 +32,7 @@ storeRoutes.post("/checkout", (req, res) => {
 
   let phonenumber = req.session.telephone 
   let phonenumberS = "phonenumber"
-  var num = "+47";
+  var num = "47";
   var landCode = num.toString();
   console.log(phonenumberS)
   let order = req.session.bagItems
@@ -43,7 +43,7 @@ storeRoutes.post("/checkout", (req, res) => {
     .create({
         body: message ,
         messagingServiceSid: 'MGc7c78d76b29a769c368622d0c696c50c',
-        to: landCode + phonenumberS
+        to: "+" + landCode + phonenumberS
     })
     .then(message => console.log(message.sid))
     .done();
