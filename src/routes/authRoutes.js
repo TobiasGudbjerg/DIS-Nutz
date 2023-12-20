@@ -89,7 +89,7 @@ router.post("/home", async (req, res) => {
       const userBagItems = await getUserBagItems(user.username);
       req.session.bagItems = userBagItems;
   
-      res.cookie('user', user.username, { httpOnly: true, maxAge: 3600000 });
+      res.cookie('user', user.username, { httpOnly: false, maxAge: 3600000 });
       res.cookie('telephone',user.telephone, {httpOnly: true, maxAge: 3600000})
       res.redirect("/store");
     } catch (err) {
