@@ -3,8 +3,11 @@
     <link rel="stylesheet" href="../styles/global.css" />
 </head>
 <body>
-    <form action="/signup" method="post">
-        <h2>Sign Up</h2>
+    <div class="center">
+        <p id="message"></p>
+        <div id="ting">
+        <form action="/signup" method="post">
+        <h1>Sign Up!</h1>
         <div class="input-field">
             <input type="text" name="username" id="username" placeholder="Enter Username">
         </div>
@@ -14,10 +17,11 @@
         <div class="input-field">
             <input type="text" name="telephone" id="telephone" placeholder="Enter phonenumber (with countrycode)">
         </div>
-        <br />
-        <input type="submit" value="Enter">
+        <input id="enter" type="submit" value="Enter">
     </form>
-    <a href="/">Go to Login</a>
+    <button><a href="/">Go Login!</a></button>
+    </div>
+</div>
 </body>
 </html>
 

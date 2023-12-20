@@ -203,3 +203,15 @@ input {
   background-color: #f09bc1;
   font-weight: bolder;
 }
+
+div.input-field {
+  margin-bottom: 15px;
+}
+input#enter {
+  border: 2px solid black;
+  border-radius: 10px;
+  font-size: 0.8rem;
+  background-color: #f7c1d9;
+  font-weight: bold;
+  margin-left: 10px;
+}
