@@ -5,11 +5,16 @@ const bodyParser = require('body-parser');
 const cors = require("cors");
 const path = require("path");
 const session = require("express-session");
-const authRoutes = require("./routes/authRoutes"); // Assuming you've got this file in the routes directory
-const storeRoutes = require("./routes/store"); // And this one too
-const chatRoutes = require("./routes/chatRoutes"); // And this one too
+const authRoutes = require("./routes/authRoutes"); 
+const storeRoutes = require("./routes/store"); 
+const chatRoutes = require("./routes/chatRoutes"); 
+const http = require("http"); 
+const { Server } = require("socket.io"); 
 
 const app = express();
+const server = http.createServer(app);
+const io = new Server(server); 
+
 
 app.use(session({
   secret: 'your-secret-key',
@@ -36,6 +41,19 @@ app.use(chatRoutes);
 
 // Use allergies-related routes
 app.use("/store",storeRoutes);
+
+// Socket.IO setup
+io.on("connection", (socket) => {
+  console.log("A user connected");
+
+  socket.on("chat message", (msg) => {
+    io.emit("chat message", msg); // Broadcast the message to all clients
+  });
+
+  socket.on("disconnect", () => {
+    console.log("A user disconnected");
+  });
+});
 
 const PORT = 3000;
 app.listen(PORT, () => {
