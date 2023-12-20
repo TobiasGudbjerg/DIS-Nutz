@@ -14,8 +14,9 @@ Klon prosjektet til din lokale maskin:
 
 bash
 Copy code
-git clone https://eksempel-url.com/ditt-prosjekt.git
-cd ditt-prosjekt
+git clone git clone https://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
+@github.com/TobiasGudbjerg/DIS-Nutz.git
+cd DIS-Nutz
 Installer nødvendige NPM-pakker:
 
 bash
