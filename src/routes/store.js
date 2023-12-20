@@ -31,6 +31,7 @@ storeRoutes.post("/checkout", (req, res) => {
   console.log("Checkout items:", bagItems);
 
   let phonenumber = req.session.telephone 
+  var landCode = "47"
   console.log(phonenumber)
   let order = req.session.bagItems
   
@@ -40,7 +41,7 @@ storeRoutes.post("/checkout", (req, res) => {
     .create({
         body: message ,
         messagingServiceSid: 'MGc7c78d76b29a769c368622d0c696c50c',
-        to: '+47' + phonenumber
+        to: landCode + phonenumber
     })
     .then(message => console.log(message.sid))
     .done();
