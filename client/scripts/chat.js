@@ -14,8 +14,6 @@ function getCookie(name) {
   return null;
 }
 
-console.log(getCookie());
-
 let username = getCookie("user");
 console.log("Username from cookie:", username); // Add this line to debug
 if (!username) username = "Anonymous";

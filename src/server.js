@@ -10,19 +10,29 @@ const storeRoutes = require("./routes/store");
 const chatRoutes = require("./routes/chatRoutes"); 
 const http = require("http"); 
 const { Server } = require("socket.io"); 
+const sharedsession = require("express-socket.io-session");
 
 const app = express();
 const httpServer = http.createServer(app);
 const io = new Server(httpServer); 
 
-
 app.use(session({
   secret: 'your-secret-key',
   resave: false,
-  saveUninitialized: false,
+  saveUninitialized: true,
   cookie: { secure: false, maxAge: 3600000 }
 }));
 
+const sessionMiddleware = session({
+  secret: 'your-secret-key',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false, maxAge: 3600000 }
+});
+
+io.use(sharedsession(sessionMiddleware, {
+  autoSave: true
+}));
 
 app.use(cors());
 app.use(express.json());
@@ -45,6 +55,12 @@ app.use("/store",storeRoutes);
 // Socket.IO setup
 io.on("connection", (socket) => {
   console.log("A user connected");
+  let username = socket.handshake.session.username;
+  if (username) {
+    console.log('Socket connected for user:', username);
+  } else {
+    console.log('Anonymous socket connection');
+  }
 
   socket.on("chat message", (msg) => {
     io.emit("chat message", msg);
