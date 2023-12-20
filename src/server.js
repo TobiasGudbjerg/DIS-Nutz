@@ -44,12 +44,6 @@ app.use("/store",storeRoutes);
 // Socket.IO setup
 io.on("connection", (socket) => {
   console.log("A user connected");
-  let username = socket.handshake.session.username;
-  if (username) {
-    console.log('Socket connected for user:', username);
-  } else {
-    console.log('Anonymous socket connection');
-  }
 
   socket.on("chat message", (msg) => {
     io.emit("chat message", msg);
