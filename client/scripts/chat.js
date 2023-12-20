@@ -17,7 +17,9 @@ function getCookie(name) {
 console.log(getCookie());
 
 let username = getCookie("user");
+console.log("Username from cookie:", username); // Add this line to debug
 if (!username) username = "Anonymous";
+
 
 socket.emit("user joined", username);
 
