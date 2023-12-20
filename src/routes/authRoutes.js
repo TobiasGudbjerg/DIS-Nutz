@@ -74,14 +74,12 @@ router.get("/", (req, res) => {
 
 router.post("/home", async (req, res) => {
     try {
-      
       const { username, password, telephone } = req.body;
       const user = await getUserByUsername(username);
       if (!user || user.password !== hashPassword(password)) {
         return res.status(401).send("Invalid credentials.");
       }
 
-      
       req.session.loggedIn = true;
       req.session.username = user.username;
       req.session.telephone = user.phone;
