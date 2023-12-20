@@ -33,6 +33,7 @@ storeRoutes.post("/checkout", (req, res) => {
 
   const phonenumber = req.session.telephone 
   let order = req.session.bagItems
+  console.log(phonenumber);
   
   let message = `Your order has been received! Your order will be ready in 10 minutes.\nOrder Details:\n${order}`;
   
