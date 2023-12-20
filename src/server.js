@@ -12,8 +12,8 @@ const http = require("http");
 const { Server } = require("socket.io"); 
 
 const app = express();
-const server = http.createServer(app);
-const io = new Server(server); 
+const httpServer = http.createServer(app);
+const io = new Server(httpServer); 
 
 
 app.use(session({
@@ -47,7 +47,7 @@ io.on("connection", (socket) => {
   console.log("A user connected");
 
   socket.on("chat message", (msg) => {
-    io.emit("chat message", msg); // Broadcast the message to all clients
+    io.emit("chat message", msg);
   });
 
   socket.on("disconnect", () => {
@@ -56,6 +56,6 @@ io.on("connection", (socket) => {
 });
 
 const PORT = 3000;
-app.listen(PORT, () => {
+httpServer.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
