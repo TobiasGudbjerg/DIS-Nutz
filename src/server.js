@@ -45,6 +45,13 @@ app.use("/store",storeRoutes);
 io.on("connection", (socket) => {
   console.log("A user connected");
 
+  socket.on("chat message", (data) => {
+    const message = data.message;
+    const user = data.user; // This is the cookie value
+    console.log(`Message from ${user}: ${message}`);
+    io.emit("chat message", `${user}: ${message}`);
+  });
+
   socket.on("chat message", (msg) => {
     io.emit("chat message", msg);
   });
