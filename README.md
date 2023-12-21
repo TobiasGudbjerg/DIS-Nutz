@@ -1,5 +1,5 @@
 # DIS-Nutz
-Dette prosjektet er en nettverksapplikasjon bygget med Node.js og Express. Den demonstrerer bruk av HTTP-protokoller, session-håndtering, informasjonskapsler (cookies), og grunnleggende nettverkssikkerhet.
+Dette prosjektet er en nettverksapplikasjon bygget med Node.js og Express. Den demonstrerer bruk av HTTP-protokoller, session-håndtering, cookies og grunnleggende nettverkssikkerhet.
 
 Krav
 Før du starter, sørg for at du har følgende installert:
@@ -7,41 +7,27 @@ Før du starter, sørg for at du har følgende installert:
 Node.js
 NPM (Node Package Manager)
 SQLite (for databasehåndtering)
-Installasjon
+(evt andre middlewares man kan se som ikke er en del av NPM)
+
 Følg disse stegene for å sette opp prosjektet lokalt:
-
-Klon prosjektet til din lokale maskin:
-
-bash
-Copy code
-git clone git clone https://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
-@github.com/TobiasGudbjerg/DIS-Nutz.git
-cd DIS-Nutz
-Installer nødvendige NPM-pakker:
-
-bash
-Copy code
-npm install
-Sett opp databasen ved å kjøre følgende kommando:
-
-bash
-Copy code
-node setup-database.js
-Dette vil opprette og konfigurere en SQLite-database for applikasjonen.
 
 Starte Applikasjonen
 For å starte applikasjonen på localhost, kjør følgende kommando i prosjektets rotmappe:
 
-bash
-Copy code
-npm start
+node server.js
 Dette vil starte serveren på http://localhost:3000. Naviger til denne URL-en i en nettleser for å få tilgang til applikasjonen.
 
 Bruk
 Applikasjonen har følgende hovedfunksjoner:
 
 Brukerautentisering
-Session-håndtering med informasjonskapsler
+Session-håndtering med informasjonskapsler (bestilingspreferanser med twilio)
 Live chat funksjonalitet
 Sikker lagring av brukerdata
-Utforsk de ulike sidene og funksjonene som applikasjonen tilbyr.
+
+
+
+
+
+git clone git clone https://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
+@github.com/TobiasGudbjerg/DIS-Nutz.git
